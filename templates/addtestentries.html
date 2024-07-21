@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Test Master</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            flex-grow: 1;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input[type="text"],
+        .form-group select,
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .form-row .form-group {
+            flex: 0 0 48%;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100px;
+            padding: 10px;
+            margin: 0 auto;
+            background-color: #6c34b8;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-submit:hover {
+            background-color: #5754d6;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background: #f2f2f2;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .footer p {
+            margin: 0;
+            color: #70657b;
+            font-size: 16px;
+        }
+
+        .footer button {
+            background-color: #6c34b8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .footer button:hover {
+            background-color: #4a148c;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1>Add Test Master</h1>
+        <form action="{{ url_for('addtestentries') }}" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="test_type">Test Type</label>
+                    <select id="test_type" name="test_type" required>
+                        <option value="">Select</option>
+                        {% for test in test_types %}
+                <option value="{{ test.test_type }}">
+                  {{ test.test_type }}
+                </option>
+                {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="question">Question</label>
+                    <input type="text" id="question" name="question" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="question_image">Question Image</label>
+                <input type="file" id="question_image" name="question_image">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="answer_a">Answer (A)</label>
+                    <input type="text" id="answer_a" name="answer_a" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer_b">Answer (B)</label>
+                    <input type="text" id="answer_b" name="answer_b" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="answer_c">Answer (C)</label>
+                    <input type="text" id="answer_c" name="answer_c" required>
+                </div>
+                <div class="form-group">
+                    <label for="answer_d">Answer (D)</label>
+                    <input type="text" id="answer_d" name="answer_d" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="correct_answer">Correct Answer</label>
+                <select id="correct_answer" name="correct_answer" required>
+                    <option value="" disabled selected>Select</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+            </div>
+            <button type="submit" class="btn-submit">Submit</button>
+        </form>
+        
+    </div>
+    <div class="footer">
+        <p>Practicum</p>
+        <p class="par">Practicum - Knowledge Test Application</p>
+        <button type="button" id="btn"  onclick="location.href='/dashboard';">Knowledge Test Application</button>
+    </div>
+ 
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <style>
+        body {
+          margin: 0;
+          font-family: Nunito, sans-serif;
+          font-size: .813rem;
+          font-weight: 400;
+          line-height: 1.5;
+          color: #47404f;
+          text-align: left;
+          background-color: #ccc;
+      }
+        
+        .login-box {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          display: flex;
+          flex-direction: column;
+          width:700px;
+          background-color: #fff;
+          background-clip: border-box;
+          border: 1px solid rgba(0, 0, 0, .125);
+          border-radius: .25rem;
+          padding: 1.5rem !important;
+        }
+
+        .login-header {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .login-body p {
+            margin-top: 20px;
+          
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #28a745;
+        }
+
+        .btn {
+            width: 80%;
+            padding: 10px;
+            background-color: #6c34b8;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color:  #5b28a3;
+        }
+
+        .remember {
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+            border-radius: 3px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+
+        .alert-success button.close {
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <div class="login-header">Login</div>
+        <div class="login-body">
+            <form class="form-group" action="{{ url_for('login') }}" method="post">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" name="email" placeholder="Email address" id="email" required>
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
+                <input type="checkbox" value="checked" class="remember"><b class="remember">Remember</b>
+                <input type="submit" value="Login" class="btn">
+            </form>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <p>No account <a href="{{ url_for('register') }}">SignIn</a></p>
+        </div>
+       
+    </div>
+</body>
+</html>

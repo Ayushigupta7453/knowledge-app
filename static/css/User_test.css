@@ -1,0 +1,107 @@
+/* static/css/styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color:white;
+    margin:12px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.p {
+    font-size: 17.6px;
+    font-family: sans-serif;
+
+    color: #332e38;
+}
+
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border-color: #332e38;
+    box-shadow: 0 0 10px 10px rgba(109, 99, 99, 0.1);
+    width: 567px;
+    height:190px;
+}
+select, input[type="radio"] {
+    display: block;
+    width:527px;
+    height:33px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #47404f;
+    padding:6px 12px;
+}
+label{
+    font-family: sans-serif;
+    font-size: 12px;
+    margin:0 0 4px;
+    color: #70657b;
+}
+.c
+{
+    font-family: Nunito sans-serif;
+    font-size:12px;
+    margin:20px 0px;
+
+}
+button
+{    color: #fff;
+    background-color: #639;
+    border-color: #639;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: .813rem;
+    line-height: 1.5;
+    margin-top:13px;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+float:right;}
+.heading
+{
+    color: #70657b;
+    font-size:16px;
+    margin:12px;
+    margin-left:12px;
+}
+button:hover {
+    background-color: #4a148c;
+}
+
+input[type="radio"] {
+    margin-bottom: 5px;
+}
+
+.footer
+{
+    margin-top: 2rem;
+    background: #f2f2f2;
+    padding: 1.25rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width:90%;
+    font-weight: bolder;
+    font-family: sans-serif;
+}
+#btn
+{
+    border-radius: 15px;
+    float:left;
+    font-size:13px;
+}
+.par
+{
+font-weight: lighter;
+font-family: sans-serif;
+}
+

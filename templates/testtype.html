@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+body{
+    font-family: Nunito, sans-serif;
+    font-size: .813rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #47404f;
+    text-align: left;
+    background-color: #fff;
+  }
+  .breadcrumb {
+    background: transparent;
+    align-items: center;
+    margin: 0 0 1.25rem;
+    padding: 0;
+}
+.breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    padding: .75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    
+    border-radius: .25rem;
+}
+.profile-info {
+    background-color: #ffffff;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 1000px;
+    height: 400px;
+}
+.submit{
+   background-color: #6c34b8; 
+   color:white;
+   border-radius:5px;
+   height:35px;
+   width:80px;
+   margin-left:40px;
+}
+.Addtesttype{
+    background-color: #6c34b8; 
+   color:white;
+   border-radius:5px;
+   height:40px;
+   width:150px;
+   margin-left:500px;
+   text-align:center:
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.Addtesttype a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 40px; /* Center the text vertically */
+}
+.buttons{
+    display:flex;
+}
+.searchbar{
+    display:flex;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top:30px;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  th {
+    background-color: #f2f2f2; 
+  }
+  td{
+    background-color:white;
+  }
+  
+  
+  tr:nth-child(even){background-color: #f2f2f2}
+
+
+  .footer {
+    text-align: center;
+    margin-top: 400px;;
+    padding: 20px;
+    background: #f2f2f2;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.footer p {
+    margin: 0;
+    color: #70657b;
+    font-size: 16px;
+}
+.footer button {
+    background-color: #6c34b8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+.footer button:hover {
+    background-color: #4a148c;
+}
+
+
+    </style>
+    <script>
+      function confirmDelete(event) {
+          if (!confirm("Are you sure you want to delete this test type?")) {
+              event.preventDefault();
+          }
+      }
+  </script>
+</head>
+<body>
+  {% extends "Sidebar.html" %}
+
+  {% block title %}User List{% endblock %}
+  
+  {% block content %}
+  <div class="container">
+    <div class="breadcrumb">
+        <h1>Test Type</h1>
+       </div>
+       <div class="profile-info">
+        <div class="buttons">
+            
+                <form class="searchbar" method="POST">
+                    <input type="search" placeholder="Search">
+                    <button type="submit" class="submit">Search</button> 
+                  </form>
+            
+              <button class="Addtesttype"><a href="{{ url_for('addtest') }}">Add Test Type</a></button>
+        </div>
+        <table>
+            <tr>
+              <th>ID</th>
+              <th>Test Type</th>
+              <th>Language</th>
+              <th>CreatedOn</th>
+              <th></th>
+            </tr>
+            {% for test in tests %}
+            <tr>
+                <td>{{ test.id }}</td>
+                <td>{{ test.test_type }}</td>
+                <td>{{ test.language }}</td>
+                <td>{{ test.created_on }}</td>
+                <td>
+                  <form action="{{ url_for('deletetest', test_id=test.id) }}" method="POST" style="display:inline;" onsubmit="confirmDelete(event);">
+                    <button type="submit" class="btn btn-link text-danger p-0" style="font-size:1.25em;"><i class="fas fa-times"></i></button>
+                  </form>
+                </td>
+              </tr>
+              {% endfor %}
+          </table>
+       </div>
+      
+  </div>
+  <div class="footer">
+    <p>Practicum</p>
+    <p class="par">Practicum - Knowledge Test Application</p>
+    <button type="button" id="btn" onclick="location.href='/dashboard';">Knowledge Test Application</button>
+</div>
+  {% endblock %}
+</body>
+</html>

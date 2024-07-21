@@ -1,0 +1,71 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Responsive Sidebar Menu</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/Sidebar.css') }}">
+    </head>
+    <body>
+        <header>
+            <div class="nav-bar">
+                <span class="menu-toggle" id="menu-toggle">&#9776;</span>
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo-img">
+                </div>
+                <div class="userPic" id="user-pic">
+                    {% if session['profile_picture'] %}
+                        <img src="{{ url_for('static', filename= session['profile_picture']) }}" alt="User Profile Picture" class="profile-pic">
+                    {% else %}
+                        <span>User</span>
+                    {% endif %}
+                    <div class="user-dropdown" id="user-dropdown">
+                        <a href="{{ url_for('profile') }}">Profile</a>
+                        <a href="{{ url_for('change_password') }}">Change Password</a>
+                        <a href="{{ url_for('logout') }}">Sign Out</a>
+                    </div>
+                </div>
+                <div class="username" id="username" style="display: none;">
+                    <span>{{ session['full_name'] }}</span>
+                </div>
+            </div>
+        </header>
+        <nav id="sidebar" class="sidebar">
+            <ul>
+                <li><a href="{{ url_for('dashboard')}}">Dashboard</a></li>
+                <li><a href="{{ url_for('users')}}">Users</a></li>
+                <li><a href="{{ url_for('testtype')}}">Test Type</a></li>
+                <li><a href="{{ url_for('test_data')}}">Test Master</a></li>
+                <li><a href="{{ url_for('allocation_bp.allocations') }}">Allocate Test</a></li>
+                <li><a href="{{ url_for('user_test.selection') }}">User Test</a></li>
+                <li><a href="{{ url_for('reports')}}">Reports</a></li>
+                <li><a href="{{ url_for('logout') }}">Log out</a></li>
+            </ul>
+        </nav>
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Sidebar toggle functionality
+                document.getElementById("menu-toggle").addEventListener("click", function() {
+                    var sidebar = document.getElementById("sidebar");
+                    var content = document.querySelector(".content");
+                    var menuToggle = document.getElementById("menu-toggle");
+                    sidebar.classList.toggle("active");
+                    content.classList.toggle("active");
+                    menuToggle.classList.toggle("active");
+                });
+            
+                // User dropdown menu functionality
+                document.getElementById("user-pic").addEventListener("click", function() {
+                    var dropdown = document.getElementById("user-dropdown");
+                    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+                });
+            });
+            
+        </script>
+    </body>
+    </html>

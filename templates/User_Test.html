@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .container img {
+            display: block;
+            margin: 0 auto 20px;
+        }
+        .container form div {
+            margin-bottom: 10px;
+        }
+        .container form input[type="radio"] {
+            margin-right: 10px;
+        }
+        .container form label {
+            font-size: 18px;
+        }
+        .container button {
+            background-color: #6c34b8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .container button#next-question {
+            display: none;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 100px;
+            padding: 20px;
+            background: #BEBEBE;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .footer p {
+            margin: 0;
+            color: #70657b;
+            font-size: 16px;
+        }
+        .footer button {
+            background-color: #6c34b8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        .footer button:hover {
+            background-color: #4a148c;
+        }
+    </style>    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    {% extends "Sidebar.html" %} {% block title %}User List{% endblock %} {%
+        block content %}
+    <div class="container">
+        <h1>{{ question['question'] }}</h1>
+        <img src="{{ url_for('static', filename='uploads/' +(question['question_image'] or 'default.jpg')) }}" alt="Question Image" style="max-width: 300px;">
+        <form id="quiz-form">
+            <input type="hidden" name="question_id" value="{{ question['id'] }}">
+            <input type="hidden" name="test_type" value="{{ question['test_type'] }}">
+            <div>
+                <input type="radio" id="answer_a" name="answer" value="A">
+                <label for="answer_a">{{ question['answer_a'] }}</label>
+            </div>
+            <div>
+                <input type="radio" id="answer_b" name="answer" value="B">
+                <label for="answer_b">{{ question['answer_b'] }}</label>
+            </div>
+            <div>
+                <input type="radio" id="answer_c" name="answer" value="C">
+                <label for="answer_c">{{ question['answer_c'] }}</label>
+            </div>
+            <div>
+                <input type="radio" id="answer_d" name="answer" value="D">
+                <label for="answer_d">{{ question['answer_d'] }}</label>
+            </div>
+            <button type="button" id="submit-answer">Submit</button>
+        </form>
+        <button id="next-question" style="display: none;">Next Question</button>
+       
+    </div>
+    <div class="footer">
+        <p>Practicum</p>
+        <p class="par">Practicum - Knowledge Test Application</p>
+        <button type="button" id="btn">Knowledge Test Application</button>
+    </div>
+    <script>
+        $(document).ready(function () {
+            function bindSubmitButton() {
+                $('#submit-answer').off('click').on('click', function () {
+                    var form = $('#quiz-form');
+                    var formData = form.serialize();
+    
+                    $.post('{{ url_for("user_test.check_answer") }}', formData, function (data) {
+                        var correctAnswer = data.correct_answer;
+                        var selectedAnswer = $('input[name="answer"]:checked').val();
+    
+                        $('input[name="answer"]').each(function () {
+                            var label = $('label[for="' + this.id + '"]');
+                            if (this.value === correctAnswer) {
+                                label.css('background-color', 'green');
+                            } else if (this.value === selectedAnswer) {
+                                label.css('background-color', 'red');
+                            }
+                        });
+    
+                        $('#submit-answer').hide();
+                        $('#next-question').show();
+                    });
+                });
+            }
+    
+            function bindNextButton() {
+                $('#next-question').off('click').on('click', function () {
+                    var form = $('#quiz-form');
+                    var formData = form.serialize();
+    
+                    $.post('{{ url_for("user_test.next_question") }}', formData, function (response) {
+                        if (response.html) {
+                            $('.container').html(response.html);
+                            bindSubmitButton(); // Rebind the submit button event for the new question
+                            bindNextButton(); // Rebind the next button event for the new question
+                        } else {
+                            window.location.href = '{{ url_for("user_test.test_results") }}';
+                        }
+                    });
+                });
+            }
+    
+            bindSubmitButton();
+            bindNextButton();
+        });
+    </script>
+    
+    
+    {% endblock %}
+</body>
+</html>

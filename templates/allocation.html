@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allocate Test Type</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #fff;
+            color: #47404f;
+            font-family: Nunito, sans-serif;
+            font-size: .813rem;
+            font-weight: 400;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 900px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            
+        }
+        h1, h2 {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-control {
+            background-color: #f0f0f0;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+        }
+        .btn-primary {
+            background-color: #6c34b8;
+            border-color: #6c34b8;
+            color:white;
+        }
+        .table {
+            margin-top: 30px;
+            border: 1px solid #dee2e6;
+        }
+        .table thead th {
+            background-color: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+        .btn-danger {
+            padding: 0 5px;
+            background-color:  #6c34b8;
+            border-color: #e3342f;
+        }
+        .alert {
+            margin-top: 20px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background: #f2f2f2;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .footer p {
+            margin: 0;
+            color: #70657b;
+            font-size: 16px;
+        }
+        .footer button {
+            background-color: #6c34b8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        .footer button:hover {
+            background-color: #6c34b8;
+        }
+    </style>
+</head>
+<body>
+    {% extends "Sidebar.html" %}
+
+    {% block title %}User List{% endblock %}
+    
+    {% block content %}
+<div class="container mt-5">
+    <h1>Allocate Test Type</h1>
+    <form method="POST" action="{{ url_for('allocation_bp.allocate') }}">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">User</label>
+                <select name="name" id="name" class="form-control">
+                    <option value="Raj Ahuja">Raj Ahuja</option>
+                    <!-- Add more user options as needed -->
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="test_type">Test Type</label>
+                <select name="test_type" id="test_type" class="form-control">
+                    <option value="Class 5-Punjabi">Class 5-Punjabi</option>
+                    <option value="Class 7-English">Class 7-English</option>
+                    <option value="Class 5-English">Class 5-English</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        {% if request.args.get('message') %}
+            <div class="alert alert-danger mt-3">{{ request.args.get('message') }}</div>
+        {% endif %}
+    </form>
+
+    <h2>Allocations</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Test Type</th>
+                <th>Created On</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for allocation in allocations %}
+                <tr>
+                    <td>{{ allocation.id }}</td>
+                    <td>{{ allocation.name }}</td>
+                    <td>{{ allocation.test_type }}</td>
+                    <td>{{ allocation.created_on }}</td>
+                    <td>
+
+                        <form action="{{ url_for('allocation_bp.delete_allocation', id=allocation.id) }}" method="POST" style="display:inline;" onsubmit="confirmDelete(event);">
+                            <button type="submit" class="btn btn-link text-danger p-0" style="font-size:1.25em;"><i class="fas fa-times"></i></button>
+                        </form>
+                        
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+</div>
+<div class="footer">
+    <p>Practicum</p>
+    <p class="par">Practicum - Knowledge Test Application</p>
+    <button type="button" id="btn" onclick="location.href='/dashboard';">Knowledge Test Application</button>
+</div>
+       
+
+{% endblock %}
+</body>
+</html>

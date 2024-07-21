@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Add custom styles here to match the design */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 0;
+        }
+        .profile-header {
+            background-color: #e9ecef;
+            text-align: center;
+            padding: 60px 20px;
+            position: relative;
+        }
+        .profile-header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid #ffffff;
+        }
+        .profile-header h2 {
+            margin: 0;
+            padding-top: 100px;
+            font-size: 24px;
+            color: #343a40;
+        }
+        .profile-info {
+            background-color: #ffffff;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            max-height: 990px;
+        }
+        .profile-info h3 {
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #6c34b8;
+        }
+        .profile-info p {
+            font-size: 13px;
+            margin: 10px 0;
+        }
+        .profile-info strong {
+            color: #6c34b8;
+        }
+        .profile-info p strong {
+            font-weight: bold;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background: #f2f2f2;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .footer p {
+            margin: 0;
+            color: #70657b;
+            font-size: 16px;
+        }
+        .footer button {
+            background-color: #6c34b8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        .footer button:hover {
+            background-color: #4a148c;
+        }
+    </style>
+</head>
+<body>
+    {% extends "Sidebar.html" %}
+
+    {% block title %}User List{% endblock %}
+    
+    {% block content %}
+    <div class="container">
+        <div class="profile-header">
+            <img src="{{ url_for('static', filename=account.profile_picture) }}" alt="Profile Picture">
+            <h2>{{ account.first_name }} {{ account.last_name }}</h2>
+        </div>
+        <div class="profile-info">
+            <h3>Personal Information</h3>
+            <p><strong>First Name:</strong> {{ account.first_name }}</p>
+            <p><strong>Last Name:</strong> {{ account.last_name }}</p>
+            <p><strong>Email:</strong> {{ account.email }}</p>
+            <p><strong>Phone:</strong> {{ account.phone }}</p>
+        </div>
+        
+
+    </div>
+    <div class="footer">
+        <p>Practicum</p>
+        <p class="par">Practicum - Knowledge Test Application</p>
+        <button type="button" id="btn" onclick="location.href='/dashboard';">Knowledge Test Application</button>
+    </div>
+
+    {% endblock %}
+</body>
+</html>

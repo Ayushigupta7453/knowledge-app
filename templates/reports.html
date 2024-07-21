@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User List</title>
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Nunito, sans-serif;
+        font-size: 0.813rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #47404f;
+        text-align: left;
+        background-color: #fff;
+      }
+      .breadcrumb {
+        background: transparent;
+        align-items: center;
+        margin: 0 0 1.25rem;
+        padding: 0;
+      }
+      .breadcrumb {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        list-style: none;
+       
+        border-radius: 0.25rem;
+      }
+      .profile-info {
+        background-color: #ffffff;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 1000px;
+        height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .form-container {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+        flex: 1;
+        margin-right: 10px;
+      }
+      .form-group:last-child {
+        margin-right: 0;
+      }
+      label {
+        font-size: 16px;
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+      select {
+        padding: 8px 12px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #fff;
+        cursor: pointer;
+        width: 100%;
+      }
+      select:hover,
+      select:focus {
+        border-color: #999;
+      }
+      .btn-primary {
+        background-color: #6c34b8;
+        border-color: #6c34b8;
+        padding: 8px 12px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: right;
+        justify-content: right;
+        items-align: right;
+      }
+      .btn-primary:hover {
+        background-color: #0069d9;
+        border-color: #0062cc;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 50px;
+        padding: 20px;
+        background: #f2f2f2;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+    .footer p {
+        margin: 0;
+        color: #70657b;
+        font-size: 16px;
+    }
+    .footer button {
+        background-color: #6c34b8;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+        margin-top: 10px;
+    }
+    .footer button:hover {
+        background-color: #4a148c;
+    }
+    </style>
+  </head>
+  <body>
+    {% extends "Sidebar.html" %} {% block title %}User List{% endblock %} {%
+    block content %}
+    <div class="container">
+      <div class="breadcrumb">
+        <h1>Reports</h1>
+      </div>
+      <div class="profile-info">
+        <form method="POST">
+          <div class="form-container">
+            <div class="form-group">
+              <label for="user">User</label>
+              <select id="user-select" name="user">
+                <option value="">Select User</option>
+                <option value="rajahuja">Raj Ahuja</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="test_type">Test Type</label>
+              <select id="test_type" name="test_type" class="form-control">
+                <option value="">Select</option>
+                {% for test in test_types %}
+                <option value="{{ test.test_type }}">
+                  {{ test.test_type }}
+                </option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      
+    </div>
+    <div class="footer">
+      <p>Practicum</p>
+      <p class="par">Practicum - Knowledge Test Application</p>
+      <button type="button" id="btn" onclick="location.href='/dashboard';">Knowledge Test Application</button>
+  </div>
+    {% endblock %}
+  </body>
+</html>

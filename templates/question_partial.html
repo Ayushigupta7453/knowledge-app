@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .container h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .container form {
+            margin-bottom: 20px;
+        }
+        .container form .p {
+            font-size: 18px;
+            color: #332e38;
+            margin-bottom: 10px;
+        }
+        .container form .c {
+            margin-bottom: 20px;
+        }
+        .container form label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #70657b;
+        }
+        .container form select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+        .container form button {
+            background-color: #6c34b8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .container form button:hover {
+            background-color: #4a148c;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            background: #f2f2f2;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .footer p {
+            margin: 0;
+            color: #70657b;
+            font-size: 16px;
+        }
+        .footer button {
+            background-color: #6c34b8;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        .footer button:hover {
+            background-color: #4a148c;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+   
+   
+        <h1>{{ question['question'] }}</h1>
+<img src="{{ url_for('static', filename='uploads/' + (question['question_image'] or 'default.jpg')) }}" alt="Question Image" style="max-width: 300px;">
+<form id="quiz-form">
+    <input type="hidden" name="question_id" value="{{ question['id'] }}">
+    <input type="hidden" name="test_type" value="{{ question['test_type'] }}">
+    <div>
+        <input type="radio" id="answer_a" name="answer" value="A">
+        <label for="answer_a">{{ question['answer_a'] }}</label>
+    </div>
+    <div>
+        <input type="radio" id="answer_b" name="answer" value="B">
+        <label for="answer_b">{{ question['answer_b'] }}</label>
+    </div>
+    <div>
+        <input type="radio" id="answer_c" name="answer" value="C">
+        <label for="answer_c">{{ question['answer_c'] }}</label>
+    </div>
+    <div>
+        <input type="radio" id="answer_d" name="answer" value="D">
+        <label for="answer_d">{{ question['answer_d'] }}</label>
+    </div>
+    <button type="button" id="submit-answer">Submit</button>
+</form>
+<button id="next-question" style="display: none;">Next Question</button>
+
+    
+   
+
+</body>
+</html>

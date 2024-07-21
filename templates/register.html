@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Sign Up</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-login {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .main-login h5 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            width: 90%;
+            padding: 10px;
+            padding-right: 20px;
+            border: 1px solid #ccc;
+            border-radius: 15px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            background-color: #6c34b8;
+            border: none;
+            border-radius: 3px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn-primary:hover {
+            background-color: #5b28a3;
+        }
+
+        .alert {
+            margin-bottom: 20px;
+            border-radius: 3px;
+            color: #155724;
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+
+        .alert button.close {
+            color: #155724;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .login-link a {
+            color: #6c34b8;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-login">
+            <h5>Sign Up</h5>
+            <form action="{{ url_for('register') }}" method="post" enctype="multipart/form-data" autocomplete="off"> 
+                <div class="form-group"> First name
+                    <input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name"/>
+                </div>
+                <div class="form-group">Last Name
+                    <input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name"/>
+                </div>
+                <div class="form-group">Email
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email address"/>
+                </div>
+                <div class="form-group"> Password
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Password" required>
+                </div>
+                <div class="form-group"> Retype Password
+                    <input type="password" class="form-control" name="retype_password" id="retype_password" placeholder="Retype Password" required>
+                </div>
+                <div class="form-group">Phone
+                    <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone"/>
+                </div>
+                <div class="form-group">Profile Picture
+                    <input type="file" class="form-control" name="profile_picture" id="profile_picture" />
+                </div>
+                <div class="form-group">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert" role="alert">
+                        {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <input type="submit" value="Sign Up" class="btn-primary">
+                </div>
+                <div class="login-link">
+                    <a href="{{ url_for('login') }}">Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
